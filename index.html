@@ -10,7 +10,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #e60028;
+      background: #ffe0e6;
       color: #fff;
       font-family: 'Press Start 2P', cursive;
       overflow-x: hidden;
@@ -32,11 +32,12 @@
       position: absolute;
       width: 4px; height: 4px;
       background: #fff;
+      border-radius: 50%;
       animation: twinkle 2s infinite alternate;
     }
     @keyframes twinkle {
-      0% { opacity: 0.1; }
-      100% { opacity: 0.5; }
+      0% { opacity: 0.3; }
+      100% { opacity: 1; }
     }
 
     /* ===== FLOATING HEARTS ===== */
@@ -94,13 +95,13 @@
     .question-text {
       margin-top: 32px;
       font-size: 16px;
-      color: #fff;
+      color: #e60028;
       line-height: 2.2;
-      text-shadow: 2px 2px 0 #b8002a;
+      text-shadow: 2px 2px 0 #ffb6c1;
       white-space: nowrap;
     }
     .question-text .name {
-      color: #ffd6e0;
+      color: #cc0025;
     }
 
     /* ===== BUTTONS ===== */
@@ -131,19 +132,20 @@
     }
 
     .btn-yes {
-      background: #fff;
-      color: #e60028;
-      box-shadow: 5px 5px 0 #ffb6c1;
+      background: #e60028;
+      color: #fff;
+      box-shadow: 5px 5px 0 #b8002a;
     }
     .btn-yes:hover {
       transform: translate(2px, 2px);
-      box-shadow: 3px 3px 0 #ffb6c1;
+      box-shadow: 3px 3px 0 #b8002a;
     }
 
     .btn-no {
-      background: #ffb6c1;
+      background: #fff;
       color: #e60028;
-      box-shadow: 5px 5px 0 #ff8fa3;
+      border: 3px solid #e60028;
+      box-shadow: 5px 5px 0 #ffb6c1;
       transition: all 0.3s ease;
       position: absolute;
     }
@@ -151,7 +153,7 @@
     .dodge-count {
       margin-top: 14px;
       font-size: 8px;
-      color: #fff;
+      color: #e60028;
       min-height: 20px;
       transition: color 0.3s;
     }
@@ -166,7 +168,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: #e60028;
+      background: #ffe0e6;
       text-align: center;
       padding: 30px;
       overflow-y: auto;
@@ -195,19 +197,19 @@
 
     .success-title {
       font-size: 18px;
-      color: #fff;
-      text-shadow: 3px 3px 0 #b8002a;
+      color: #e60028;
+      text-shadow: 2px 2px 0 #ffb6c1;
       margin-top: 18px;
     }
 
     .love-note {
       margin-top: 28px;
       background: #fff;
-      border: 4px solid #ffb6c1;
+      border: 4px solid #e60028;
       padding: 28px;
       max-width: 560px;
       width: 92%;
-      box-shadow: 8px 8px 0 #ff8fa3;
+      box-shadow: 8px 8px 0 #ffb6c1;
     }
     .love-note p {
       font-size: 9px;
@@ -229,9 +231,9 @@
     .footer {
       margin-top: 36px;
       font-size: 7px;
-      color: #ffd6e0;
+      color: #e60028;
       line-height: 2.4;
-      opacity: 0.8;
+      opacity: 0.5;
     }
 
     /* ===== CONFETTI ===== */
@@ -427,7 +429,7 @@
     // STARS (pink-white tones)
     // ============================
     const starsEl = document.getElementById('stars');
-    const starColors = ['#ffb6c1', '#ffd6e0', '#ffffff', '#ffffff'];
+    const starColors = ['#ffffff', '#ffffff', '#ffb6c1', '#ff8fa3'];
     for (let i = 0; i < 100; i++) {
       const s = document.createElement('div');
       s.className = 'star';
