@@ -93,10 +93,11 @@
     /* Question text below heart */
     .question-text {
       margin-top: 32px;
-      font-size: 12px;
+      font-size: 16px;
       color: #fff;
-      line-height: 2.4;
+      line-height: 2.2;
       text-shadow: 2px 2px 0 #b8002a;
+      white-space: nowrap;
     }
     .question-text .name {
       color: #ffd6e0;
@@ -269,7 +270,7 @@
     @media (max-width: 600px) {
       .big-heart-wrap { width: 210px; height: 184px; }
       .big-heart-wrap canvas { width: 210px; height: 184px; }
-      .question-text { font-size: 10px; }
+      .question-text { font-size: 11px; white-space: normal; }
       .pixel-btn { font-size: 11px; padding: 14px 26px; }
       .success-title { font-size: 13px; }
       .love-note p { font-size: 8px; }
@@ -279,7 +280,7 @@
     @media (max-width: 380px) {
       .big-heart-wrap { width: 170px; height: 149px; }
       .big-heart-wrap canvas { width: 170px; height: 149px; }
-      .question-text { font-size: 8px; }
+      .question-text { font-size: 9px; white-space: normal; }
       .pixel-btn { font-size: 9px; padding: 12px 20px; }
     }
   </style>
@@ -300,7 +301,7 @@
 
     <!-- Question below the heart -->
     <div class="question-text">
-      <span class="name">J-Bae</span>, will you<br>be my valentine?
+      <span class="name">J-Bae</span>, will you be my valentine?
     </div>
 
     <!-- NO first (left), YES second (right) -->
@@ -318,7 +319,7 @@
     <div class="success-title">I KNEW YOU'D SAY YES!</div>
     <div class="love-note">
       <p>
-        Hey <span class="hl">J-Bae</span>,
+        My dear <span class="hl">J-Bae</span>,
         <br><br>
         I'm out here in <span class="hl">San Francisco</span>
         counting down the days,
@@ -326,7 +327,7 @@
         just makes me wish
         <span class="hl">you were here</span> next to me.
         <br><br>
-        Two weeks without you
+        Already 3 days without you
         and I've realized something
         I already knew:
         <span class="hl">you're my favorite person
