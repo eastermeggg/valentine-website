@@ -163,12 +163,11 @@
       position: fixed;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      z-index: 1000;
+      z-index: 10;
       display: none;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: #ffe0e6;
       text-align: center;
       padding: 30px;
       overflow-y: auto;
@@ -182,17 +181,15 @@
       100% { opacity: 1; }
     }
 
-    .success-heart {
-      font-size: 70px;
-      animation: successBeat 1s ease-in-out infinite;
+    .success-heart-wrap {
+      width: 200px;
+      height: 175px;
+      animation: heartBeat 1s ease-in-out infinite;
     }
-    @keyframes successBeat {
-      0%   { transform: scale(1); }
-      15%  { transform: scale(1.15); }
-      30%  { transform: scale(1); }
-      45%  { transform: scale(1.1); }
-      60%  { transform: scale(1); }
-      100% { transform: scale(1); }
+    .success-heart-wrap canvas {
+      image-rendering: pixelated;
+      width: 200px;
+      height: 175px;
     }
 
     .success-title {
@@ -268,6 +265,18 @@
       100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
     }
 
+    /* ===== MOUSE TRAIL ===== */
+    .trail-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      animation: trailFade 0.8s ease-out forwards;
+    }
+    @keyframes trailFade {
+      0%   { transform: scale(1) translateY(0); opacity: 1; }
+      100% { transform: scale(0) translateY(-30px); opacity: 0; }
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 600px) {
       .big-heart-wrap { width: 210px; height: 184px; }
@@ -276,7 +285,8 @@
       .pixel-btn { font-size: 11px; padding: 14px 26px; }
       .success-title { font-size: 13px; }
       .love-note p { font-size: 8px; }
-      .success-heart { font-size: 50px; }
+      .success-heart-wrap { width: 150px; height: 131px; }
+      .success-heart-wrap canvas { width: 150px; height: 131px; }
     }
 
     @media (max-width: 380px) {
@@ -317,7 +327,9 @@
 
   <!-- ===== SUCCESS SCREEN ===== -->
   <div class="success-screen" id="successScreen">
-    <div class="success-heart">&#x2764;&#xFE0F;</div>
+    <div class="success-heart-wrap">
+      <canvas id="successHeartCanvas" width="32" height="28"></canvas>
+    </div>
     <div class="success-title">I KNEW YOU'D SAY YES!</div>
     <div class="love-note">
       <p>
@@ -571,6 +583,55 @@
         setTimeout(() => el.remove(), 6000);
       }
     }
+
+    // ============================
+    // SUCCESS HEART CANVAS
+    // ============================
+    const successCanvas = document.getElementById('successHeartCanvas');
+    const sctx = successCanvas.getContext('2d');
+
+    function drawSuccessHeart() {
+      sctx.clearRect(0, 0, 32, 28);
+      for (let y = 0; y < H.length; y++) {
+        for (let x = 0; x < H[y].length; x++) {
+          if (H[y][x] === '1') {
+            let ci;
+            if (y < 5 && x > 4 && x < 14) {
+              ci = Math.random() > 0.7 ? 5 : (Math.random() > 0.5 ? 3 : 4);
+            } else if (Math.random() > 0.88) {
+              ci = Math.floor(Math.random() * palette.length);
+            } else {
+              ci = y < 8 ? 2 : (Math.random() > 0.4 ? 0 : 1);
+            }
+            sctx.fillStyle = palette[ci];
+            sctx.fillRect(x, y, 1, 1);
+          }
+        }
+      }
+    }
+    drawSuccessHeart();
+    setInterval(drawSuccessHeart, 400);
+
+    // ============================
+    // MOUSE HEART TRAIL
+    // ============================
+    const trailEmojis = ['\u2764\uFE0F', '\uD83D\uDC96', '\uD83D\uDC95', '\uD83D\uDC97'];
+    let lastTrail = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      const now = Date.now();
+      if (now - lastTrail < 50) return; // throttle
+      lastTrail = now;
+
+      const t = document.createElement('div');
+      t.className = 'trail-heart';
+      t.textContent = trailEmojis[Math.floor(Math.random() * trailEmojis.length)];
+      t.style.left = e.clientX + 'px';
+      t.style.top = e.clientY + 'px';
+      t.style.fontSize = (10 + Math.random() * 14) + 'px';
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 800);
+    });
 
     // ============================
     // CLICK SPARKLE
