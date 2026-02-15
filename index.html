@@ -10,7 +10,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #ffe0e6;
+      background: #4a0020;
       color: #fff;
       font-family: 'Press Start 2P', cursive;
       overflow-x: hidden;
@@ -31,13 +31,13 @@
     .star {
       position: absolute;
       width: 4px; height: 4px;
-      background: #fff;
+      background: #ffb6c1;
       border-radius: 50%;
       animation: twinkle 2s infinite alternate;
     }
     @keyframes twinkle {
-      0% { opacity: 0.3; }
-      100% { opacity: 1; }
+      0% { opacity: 0.2; }
+      100% { opacity: 0.8; }
     }
 
     /* ===== FLOATING HEARTS ===== */
@@ -95,13 +95,13 @@
     .question-text {
       margin-top: 32px;
       font-size: 16px;
-      color: #e60028;
+      color: #fff;
       line-height: 2.2;
-      text-shadow: 2px 2px 0 #ffb6c1;
+      text-shadow: 2px 2px 0 #6b0030;
       white-space: nowrap;
     }
     .question-text .name {
-      color: #cc0025;
+      color: #ffb6c1;
     }
 
     /* ===== BUTTONS ===== */
@@ -132,20 +132,20 @@
     }
 
     .btn-yes {
-      background: #e60028;
-      color: #fff;
-      box-shadow: 5px 5px 0 #b8002a;
+      background: #ffb6c1;
+      color: #4a0020;
+      box-shadow: 5px 5px 0 #ff8fa3;
     }
     .btn-yes:hover {
       transform: translate(2px, 2px);
-      box-shadow: 3px 3px 0 #b8002a;
+      box-shadow: 3px 3px 0 #ff8fa3;
     }
 
     .btn-no {
-      background: #fff;
-      color: #e60028;
-      border: 3px solid #e60028;
-      box-shadow: 5px 5px 0 #ffb6c1;
+      background: #6b0030;
+      color: #ffb6c1;
+      border: 2px solid #ffb6c1;
+      box-shadow: 5px 5px 0 #3a0018;
       transition: all 0.3s ease;
       position: absolute;
     }
@@ -153,7 +153,7 @@
     .dodge-count {
       margin-top: 14px;
       font-size: 8px;
-      color: #e60028;
+      color: #ffb6c1;
       min-height: 20px;
       transition: color 0.3s;
     }
@@ -194,33 +194,33 @@
 
     .success-title {
       font-size: 18px;
-      color: #e60028;
-      text-shadow: 2px 2px 0 #ffb6c1;
+      color: #fff;
+      text-shadow: 2px 2px 0 #6b0030;
       margin-top: 18px;
     }
 
     .love-note {
       margin-top: 28px;
-      background: #fff;
-      border: 4px solid #e60028;
+      background: #5e0028;
+      border: 4px solid #ffb6c1;
       padding: 28px;
       max-width: 560px;
       width: 92%;
-      box-shadow: 8px 8px 0 #ffb6c1;
+      box-shadow: 8px 8px 0 #3a0018;
     }
     .love-note p {
       font-size: 9px;
       line-height: 2.6;
-      color: #cc0033;
+      color: #ffd6e0;
     }
     .love-note .hl {
-      color: #e60028;
+      color: #fff;
       font-style: normal;
     }
     .love-note .sign {
       margin-top: 22px;
       font-size: 8px;
-      color: #ff6b81;
+      color: #ffb6c1;
       text-align: right;
       line-height: 2.4;
     }
@@ -228,7 +228,7 @@
     .footer {
       margin-top: 36px;
       font-size: 7px;
-      color: #e60028;
+      color: #ffb6c1;
       line-height: 2.4;
       opacity: 0.5;
     }
@@ -316,10 +316,10 @@
       <span class="name">J-Bae</span>, will you be my valentine?
     </div>
 
-    <!-- NO first (left), YES second (right) -->
+    <!-- YES (left), NO (right) -->
     <div class="btn-row" id="btnRow">
-      <button class="pixel-btn btn-no" id="btnNo">No</button>
       <button class="pixel-btn btn-yes" id="btnYes">Yes!</button>
+      <button class="pixel-btn btn-no" id="btnNo">No</button>
     </div>
 
     <div class="dodge-count" id="dodgeCount"></div>
@@ -441,7 +441,7 @@
     // STARS (pink-white tones)
     // ============================
     const starsEl = document.getElementById('stars');
-    const starColors = ['#ffffff', '#ffffff', '#ffb6c1', '#ff8fa3'];
+    const starColors = ['#ffb6c1', '#ffd6e0', '#ffffff', '#ff8fa3'];
     for (let i = 0; i < 100; i++) {
       const s = document.createElement('div');
       s.className = 'star';
