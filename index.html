@@ -3,15 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Valentine's Day, J-Bae!</title>
+  <title>Will You Be My Valentine, J-Bae?</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background: #1a0a2e;
@@ -19,356 +15,269 @@
       font-family: 'Press Start 2P', cursive;
       overflow-x: hidden;
       min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    /* Pixel star background */
+    /* ===== STARS ===== */
     .stars {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       pointer-events: none;
       z-index: 0;
     }
-
     .star {
       position: absolute;
-      width: 4px;
-      height: 4px;
+      width: 4px; height: 4px;
       background: #fff;
       animation: twinkle 2s infinite alternate;
     }
-
     @keyframes twinkle {
       0% { opacity: 0.2; }
       100% { opacity: 1; }
     }
 
-    /* Floating pixel hearts */
+    /* ===== FLOATING HEARTS ===== */
     .floating-hearts {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       pointer-events: none;
       z-index: 1;
     }
-
     .pixel-heart-float {
       position: absolute;
       bottom: -40px;
       animation: floatUp linear infinite;
-      image-rendering: pixelated;
     }
-
     @keyframes floatUp {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(-110vh) rotate(20deg);
-        opacity: 0;
-      }
+      0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-110vh) rotate(20deg); opacity: 0; }
     }
 
-    /* Main content */
-    .container {
+    /* ===== PROPOSAL SCREEN ===== */
+    .proposal-screen {
       position: relative;
       z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 20px;
-    }
-
-    /* Pixel heart hero */
-    .hero {
-      margin-top: 40px;
+      padding: 30px 20px;
       text-align: center;
+      transition: opacity 0.5s;
     }
 
-    .pixel-heart {
-      display: inline-block;
+    /* Large pixel heart with text */
+    .big-heart-wrap {
       position: relative;
-      width: 140px;
-      height: 120px;
-      animation: heartBounce 0.6s ease-in-out infinite alternate;
+      width: 320px;
+      height: 280px;
+      animation: heartPulse 0.8s ease-in-out infinite alternate;
     }
-
-    @keyframes heartBounce {
-      0% { transform: scale(1); }
-      100% { transform: scale(1.15); }
+    @keyframes heartPulse {
+      0%   { transform: scale(1); }
+      100% { transform: scale(1.08); }
     }
-
-    .pixel-heart canvas {
+    .big-heart-wrap canvas {
       image-rendering: pixelated;
-      width: 140px;
-      height: 120px;
+      width: 320px;
+      height: 280px;
+    }
+    .heart-text-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -45%);
+      width: 200px;
+      text-align: center;
+      pointer-events: none;
+    }
+    .heart-text-overlay .question {
+      font-size: 10px;
+      color: #fff;
+      text-shadow: 2px 2px 0 #8b0000;
+      line-height: 2;
+    }
+    .heart-text-overlay .name {
+      font-size: 16px;
+      color: #ffd700;
+      text-shadow: 2px 2px 0 #b8860b;
+      margin-top: 6px;
     }
 
     .title {
       font-size: 14px;
-      margin-top: 30px;
+      margin-top: 24px;
       color: #ff6b9d;
       text-shadow: 3px 3px 0 #c0392b;
       line-height: 2;
       animation: titleGlow 2s ease-in-out infinite alternate;
     }
-
     @keyframes titleGlow {
-      0% { text-shadow: 3px 3px 0 #c0392b, 0 0 10px #ff6b9d; }
+      0%   { text-shadow: 3px 3px 0 #c0392b, 0 0 10px #ff6b9d; }
       100% { text-shadow: 3px 3px 0 #c0392b, 0 0 30px #ff6b9d, 0 0 60px #ff6b9d; }
     }
 
-    .subtitle {
-      font-size: 24px;
-      margin-top: 10px;
-      color: #fff;
-      text-shadow: 2px 2px 0 #8e44ad;
-      animation: subtitlePop 1s ease-out;
-    }
-
-    @keyframes subtitlePop {
-      0% { transform: scale(0); opacity: 0; }
-      60% { transform: scale(1.2); }
-      100% { transform: scale(1); opacity: 1; }
-    }
-
-    /* Message box - pixel art style */
-    .message-box {
-      margin-top: 50px;
-      background: #2d1b4e;
-      border: 4px solid #ff6b9d;
-      padding: 30px;
-      max-width: 600px;
-      width: 90%;
-      position: relative;
-      image-rendering: pixelated;
-      box-shadow:
-        8px 8px 0 #c0392b,
-        inset 0 0 20px rgba(255, 107, 157, 0.1);
-    }
-
-    .message-box::before {
-      content: '';
-      position: absolute;
-      top: -4px;
-      left: -4px;
-      right: -4px;
-      bottom: -4px;
-      border: 4px solid transparent;
-      animation: borderFlash 3s infinite;
-    }
-
-    @keyframes borderFlash {
-      0%, 100% { border-color: transparent; }
-      50% { border-color: #f39c12; }
-    }
-
-    .message-box p {
-      font-size: 10px;
-      line-height: 2.4;
-      color: #f8c8dc;
-    }
-
-    .message-box .highlight {
-      color: #f39c12;
-      font-size: 12px;
-    }
-
-    /* Interactive pixel button */
-    .pixel-btn {
+    /* ===== BUTTONS ===== */
+    .btn-row {
+      display: flex;
+      gap: 30px;
       margin-top: 40px;
-      padding: 16px 32px;
+      align-items: center;
+      justify-content: center;
+      min-height: 80px;
+      position: relative;
+      width: 100%;
+    }
+
+    .pixel-btn {
+      padding: 18px 36px;
       font-family: 'Press Start 2P', cursive;
-      font-size: 12px;
+      font-size: 14px;
       color: #fff;
-      background: #e74c3c;
       border: none;
       cursor: pointer;
-      position: relative;
-      transition: transform 0.1s;
-      box-shadow: 6px 6px 0 #8b0000;
       text-transform: uppercase;
+      transition: transform 0.1s;
+      position: relative;
+    }
+    .pixel-btn:active {
+      transform: translate(4px, 4px) !important;
     }
 
-    .pixel-btn:hover {
+    .btn-yes {
+      background: #27ae60;
+      box-shadow: 6px 6px 0 #1a7a42;
+      animation: yesGlow 1.5s ease-in-out infinite alternate;
+    }
+    .btn-yes:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 4px 4px 0 #1a7a42;
+    }
+    @keyframes yesGlow {
+      0%   { box-shadow: 6px 6px 0 #1a7a42, 0 0 0px #27ae60; }
+      100% { box-shadow: 6px 6px 0 #1a7a42, 0 0 20px #27ae60, 0 0 40px rgba(39,174,96,0.3); }
+    }
+
+    .btn-no {
+      background: #e74c3c;
+      box-shadow: 6px 6px 0 #8b0000;
+      transition: all 0.3s ease;
+      position: absolute;
+    }
+    .btn-no:hover {
       transform: translate(2px, 2px);
       box-shadow: 4px 4px 0 #8b0000;
     }
 
-    .pixel-btn:active {
-      transform: translate(6px, 6px);
-      box-shadow: 0px 0px 0 #8b0000;
-    }
-
-    /* Power-up bar */
-    .love-meter {
-      margin-top: 50px;
-      text-align: center;
-      max-width: 500px;
-      width: 90%;
-    }
-
-    .love-meter-label {
-      font-size: 10px;
-      color: #f39c12;
-      margin-bottom: 12px;
-    }
-
-    .meter-bar {
-      width: 100%;
-      height: 30px;
-      background: #1a0a2e;
-      border: 4px solid #ff6b9d;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .meter-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #e74c3c, #ff6b9d, #f39c12);
-      transition: width 2s ease-out;
-      position: relative;
-    }
-
-    .meter-fill.animate {
-      width: 100%;
-    }
-
-    .meter-fill::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 8px,
-        rgba(255,255,255,0.1) 8px,
-        rgba(255,255,255,0.1) 16px
-      );
-    }
-
-    .meter-text {
+    .dodge-count {
+      margin-top: 16px;
       font-size: 8px;
-      color: #ff6b9d;
-      margin-top: 8px;
+      color: #8e44ad;
+      min-height: 20px;
+      transition: color 0.3s;
     }
 
-    /* Reasons list */
-    .reasons {
-      margin-top: 50px;
-      max-width: 600px;
-      width: 90%;
-    }
-
-    .reasons h2 {
-      font-size: 12px;
-      color: #f39c12;
-      text-align: center;
-      margin-bottom: 24px;
-      text-shadow: 2px 2px 0 #c0392b;
-    }
-
-    .reason-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 20px;
-      padding: 16px;
-      background: #2d1b4e;
-      border-left: 4px solid #ff6b9d;
-      opacity: 0;
-      transform: translateX(-30px);
-      transition: all 0.5s ease-out;
-    }
-
-    .reason-item.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .reason-icon {
-      font-size: 20px;
-      min-width: 30px;
-      text-align: center;
-    }
-
-    .reason-text {
-      font-size: 9px;
-      line-height: 2.2;
-      color: #f8c8dc;
-    }
-
-    /* Secret message area */
-    .secret-area {
-      margin-top: 60px;
+    /* ===== SUCCESS SCREEN ===== */
+    .success-screen {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #1a0a2e;
       text-align: center;
       padding: 30px;
-      display: none;
+    }
+    .success-screen.show {
+      display: flex;
+      animation: fadeIn 0.6s ease-out;
+    }
+    @keyframes fadeIn {
+      0%   { opacity: 0; }
+      100% { opacity: 1; }
     }
 
-    .secret-area.show {
-      display: block;
-      animation: pixelReveal 0.5s steps(8) forwards;
+    .success-heart {
+      font-size: 80px;
+      animation: successBounce 0.6s ease-in-out infinite alternate;
+    }
+    @keyframes successBounce {
+      0%   { transform: scale(1) rotate(-5deg); }
+      100% { transform: scale(1.2) rotate(5deg); }
     }
 
-    @keyframes pixelReveal {
-      0% { opacity: 0; transform: scale(0.5); }
-      100% { opacity: 1; transform: scale(1); }
-    }
-
-    .secret-text {
-      font-size: 18px;
-      color: #f39c12;
-      text-shadow: 3px 3px 0 #c0392b;
+    .success-title {
+      font-size: 20px;
+      color: #ffd700;
+      text-shadow: 3px 3px 0 #b8860b;
+      margin-top: 20px;
       animation: rainbow 3s linear infinite;
     }
-
     @keyframes rainbow {
-      0% { color: #ff6b9d; }
-      25% { color: #f39c12; }
-      50% { color: #e74c3c; }
-      75% { color: #ff6b9d; }
-      100% { color: #f39c12; }
+      0%   { color: #ff6b9d; }
+      25%  { color: #ffd700; }
+      50%  { color: #e74c3c; }
+      75%  { color: #ff6b9d; }
+      100% { color: #ffd700; }
     }
 
-    /* Footer */
-    .footer {
-      margin-top: 80px;
-      padding: 30px;
-      text-align: center;
+    .love-note {
+      margin-top: 30px;
+      background: #2d1b4e;
+      border: 4px solid #ff6b9d;
+      padding: 28px;
+      max-width: 550px;
+      width: 90%;
+      box-shadow: 8px 8px 0 #c0392b;
+    }
+    .love-note p {
+      font-size: 9px;
+      line-height: 2.6;
+      color: #f8c8dc;
+    }
+    .love-note .hl {
+      color: #ffd700;
+    }
+    .love-note .sign {
+      margin-top: 20px;
       font-size: 8px;
+      color: #ff6b9d;
+      text-align: right;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 7px;
       color: #8e44ad;
       line-height: 2.4;
     }
 
-    .footer .year {
-      color: #ff6b9d;
-      font-size: 10px;
+    /* ===== CONFETTI ===== */
+    .confetti-piece {
+      position: fixed;
+      z-index: 999;
+      pointer-events: none;
+      animation: confettiFall linear forwards;
+    }
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(-10vh) rotate(0deg) scale(1);
+        opacity: 1;
+      }
+      80% { opacity: 1; }
+      100% {
+        transform: translateY(110vh) rotate(var(--rot)) scale(0.5);
+        opacity: 0;
+      }
     }
 
-    /* Konami hint */
-    .konami-hint {
-      margin-top: 20px;
-      font-size: 7px;
-      color: #3d1f6d;
-      text-align: center;
-      cursor: default;
-    }
-
-    .konami-hint:hover {
-      color: #8e44ad;
-    }
-
-    /* Explosion particles */
+    /* ===== PARTICLE ===== */
     .particle {
       position: fixed;
       pointer-events: none;
@@ -376,296 +285,351 @@
       font-size: 20px;
       animation: particleFly 1s ease-out forwards;
     }
-
     @keyframes particleFly {
-      0% { transform: translate(0, 0) scale(1); opacity: 1; }
+      0%   { transform: translate(0,0) scale(1); opacity: 1; }
       100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
     }
 
-    /* Responsive */
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 600px) {
+      .big-heart-wrap {
+        width: 240px;
+        height: 210px;
+      }
+      .big-heart-wrap canvas {
+        width: 240px;
+        height: 210px;
+      }
+      .heart-text-overlay { width: 150px; }
+      .heart-text-overlay .question { font-size: 8px; }
+      .heart-text-overlay .name { font-size: 12px; }
       .title { font-size: 10px; }
-      .subtitle { font-size: 18px; }
-      .message-box p { font-size: 8px; }
-      .pixel-btn { font-size: 10px; padding: 12px 24px; }
-      .reasons h2 { font-size: 10px; }
-      .reason-text { font-size: 8px; }
+      .pixel-btn { font-size: 11px; padding: 14px 28px; }
+      .success-title { font-size: 14px; }
+      .love-note p { font-size: 8px; }
+      .success-heart { font-size: 60px; }
+    }
+
+    @media (max-width: 380px) {
+      .big-heart-wrap {
+        width: 200px;
+        height: 175px;
+      }
+      .big-heart-wrap canvas {
+        width: 200px;
+        height: 175px;
+      }
+      .heart-text-overlay .question { font-size: 7px; }
+      .heart-text-overlay .name { font-size: 10px; }
+      .pixel-btn { font-size: 9px; padding: 12px 20px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Stars -->
+  <!-- Background layers -->
   <div class="stars" id="stars"></div>
-
-  <!-- Floating hearts -->
   <div class="floating-hearts" id="floatingHearts"></div>
 
-  <!-- Main content -->
-  <div class="container">
+  <!-- ===== PROPOSAL SCREEN ===== -->
+  <div class="proposal-screen" id="proposalScreen">
 
-    <!-- Hero section -->
-    <div class="hero">
-      <div class="pixel-heart">
-        <canvas id="heartCanvas" width="14" height="12"></canvas>
+    <!-- Big pixel heart with text inside -->
+    <div class="big-heart-wrap">
+      <canvas id="heartCanvas" width="32" height="28"></canvas>
+      <div class="heart-text-overlay">
+        <div class="question">WILL YOU BE MY</div>
+        <div class="name">VALENTINE?</div>
       </div>
-      <div class="title">HAPPY VALENTINE'S DAY</div>
-      <div class="subtitle">J-Bae</div>
     </div>
 
-    <!-- Love letter message -->
-    <div class="message-box">
+    <div class="title">J-BAE</div>
+
+    <!-- YES / NO buttons -->
+    <div class="btn-row" id="btnRow">
+      <button class="pixel-btn btn-yes" id="btnYes">YES!</button>
+      <button class="pixel-btn btn-no" id="btnNo">No</button>
+    </div>
+
+    <div class="dodge-count" id="dodgeCount"></div>
+  </div>
+
+  <!-- ===== SUCCESS SCREEN ===== -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-heart">&#x1F496;</div>
+    <div class="success-title">YAY!!! I KNEW IT!</div>
+    <div class="love-note">
       <p>
-        Hey J-Bae! <span class="highlight">Player 2</span> has entered the game of my heart.
+        Dear <span class="hl">J-Bae</span>,
         <br><br>
-        Every day with you is like finding a
-        <span class="highlight">secret level</span> full of bonus points.
-        You make my heart go boop-boop-boop
-        like a power-up sound effect.
+        From the <span class="hl">foggy mornings</span> at Dolores Park
+        to the late-night burritos in the Mission,
+        every moment with you feels like a
+        <span class="hl">secret level</span> I never want to end.
         <br><br>
-        You're my <span class="highlight">1-UP</span>,
-        my save point, and my
-        <span class="highlight">final boss</span>
-        (because you've totally defeated me).
+        You're the <span class="hl">Player 2</span> to my every adventure,
+        my co-op partner for life.
+        This city is magic, but only because
+        <span class="hl">you're in it</span>.
+        <br><br>
+        I love you more than sourdough loves fog.
+        <br>
+        And that's saying a lot.
       </p>
-    </div>
-
-    <!-- Click for hearts button -->
-    <button class="pixel-btn" id="heartBtn" onclick="explodeHearts(event)">
-      Click for hearts!
-    </button>
-
-    <!-- Love meter -->
-    <div class="love-meter">
-      <div class="love-meter-label">LOVE POWER LEVEL</div>
-      <div class="meter-bar">
-        <div class="meter-fill" id="meterFill"></div>
-      </div>
-      <div class="meter-text" id="meterText">LOADING LOVE...</div>
-    </div>
-
-    <!-- Reasons section -->
-    <div class="reasons">
-      <h2>WHY YOU'RE THE BEST:</h2>
-      <div class="reason-item" data-delay="0">
-        <span class="reason-icon">&#x1F3AE;</span>
-        <span class="reason-text">You're always down for an adventure (even the silly ones)</span>
-      </div>
-      <div class="reason-item" data-delay="200">
-        <span class="reason-icon">&#x2B50;</span>
-        <span class="reason-text">Your smile is a critical hit to my heart every single time</span>
-      </div>
-      <div class="reason-item" data-delay="400">
-        <span class="reason-icon">&#x1F355;</span>
-        <span class="reason-text">You never judge my questionable food choices</span>
-      </div>
-      <div class="reason-item" data-delay="600">
-        <span class="reason-icon">&#x1F496;</span>
-        <span class="reason-text">You make the ordinary feel like a whole new world</span>
-      </div>
-      <div class="reason-item" data-delay="800">
-        <span class="reason-icon">&#x1F3C6;</span>
-        <span class="reason-text">You're the high score I never want to beat</span>
+      <div class="sign">
+        With all my pixels,<br>
+        Your Valentine &#x2764;&#xFE0F;<br>
+        San Francisco, 2025
       </div>
     </div>
 
-    <!-- Secret area (triggered by Konami code or button) -->
-    <div class="secret-area" id="secretArea">
-      <div class="secret-text">
-        I love you to the moon<br>
-        and back, J-Bae!<br>
-        &#x1F48E; GAME OVER &#x1F48E;<br>
-        (You win my heart forever)
-      </div>
-    </div>
-
-    <div class="konami-hint">psst... try the secret code</div>
-
-    <!-- Footer -->
     <div class="footer">
-      <div>CRAFTED WITH &#x2764;&#xFE0F; AND PIXELS</div>
-      <div class="year">2025</div>
+      CRAFTED WITH &#x2764;&#xFE0F; AND PIXELS
     </div>
   </div>
 
-  <!-- Audio for pixel sounds (generated via Web Audio API) -->
   <script>
-    // ====== PIXEL HEART DRAWING ======
+    // ============================
+    // PIXEL HEART (larger canvas)
+    // ============================
     const canvas = document.getElementById('heartCanvas');
     const ctx = canvas.getContext('2d');
 
-    const heartPattern = [
-      [0,0,1,1,0,0,0,0,1,1,0,0,0,0],
-      [0,1,1,1,1,0,0,1,1,1,1,0,0,0],
-      [1,1,1,1,1,1,1,1,1,1,1,1,0,0],
-      [1,1,1,1,1,1,1,1,1,1,1,1,0,0],
-      [1,1,1,1,1,1,1,1,1,1,1,1,0,0],
-      [0,1,1,1,1,1,1,1,1,1,1,0,0,0],
-      [0,0,1,1,1,1,1,1,1,1,0,0,0,0],
-      [0,0,0,1,1,1,1,1,1,0,0,0,0,0],
-      [0,0,0,0,1,1,1,1,0,0,0,0,0,0],
-      [0,0,0,0,0,1,1,0,0,0,0,0,0,0],
+    // 32x28 pixel heart pattern
+    const H = [
+      '00000111111000000011111100000000',
+      '00011111111110001111111111000000',
+      '01111111111111111111111111110000',
+      '11111111111111111111111111111000',
+      '11111111111111111111111111111100',
+      '11111111111111111111111111111100',
+      '11111111111111111111111111111100',
+      '11111111111111111111111111111100',
+      '11111111111111111111111111111100',
+      '11111111111111111111111111111100',
+      '11111111111111111111111111111100',
+      '01111111111111111111111111111000',
+      '01111111111111111111111111111000',
+      '00111111111111111111111111110000',
+      '00111111111111111111111111110000',
+      '00011111111111111111111111100000',
+      '00001111111111111111111110000000',
+      '00000111111111111111111100000000',
+      '00000011111111111111111000000000',
+      '00000001111111111111110000000000',
+      '00000000111111111111100000000000',
+      '00000000011111111111000000000000',
+      '00000000001111111110000000000000',
+      '00000000000111111100000000000000',
+      '00000000000011111000000000000000',
+      '00000000000001110000000000000000',
+      '00000000000000100000000000000000',
+      '00000000000000000000000000000000',
     ];
 
-    const colors = ['#e74c3c', '#ff6b9d', '#c0392b'];
+    const heartColors = ['#e74c3c', '#ff6b9d', '#d63031', '#ff4757', '#c0392b'];
 
     function drawHeart() {
-      ctx.clearRect(0, 0, 14, 12);
-      for (let y = 0; y < heartPattern.length; y++) {
-        for (let x = 0; x < heartPattern[y].length; x++) {
-          if (heartPattern[y][x]) {
-            const shade = Math.random() > 0.85 ? 1 : (y < 3 ? 0 : 2);
-            ctx.fillStyle = colors[shade];
+      ctx.clearRect(0, 0, 32, 28);
+      for (let y = 0; y < H.length; y++) {
+        for (let x = 0; x < H[y].length; x++) {
+          if (H[y][x] === '1') {
+            // shimmer: random shade per pixel each frame
+            const ci = Math.random() > 0.8 ? Math.floor(Math.random() * heartColors.length) : (y < 6 ? 1 : 0);
+            ctx.fillStyle = heartColors[ci];
             ctx.fillRect(x, y, 1, 1);
           }
         }
       }
     }
-
     drawHeart();
-    setInterval(drawHeart, 400);
+    setInterval(drawHeart, 350);
 
-    // ====== STARS ======
+    // ============================
+    // STARS
+    // ============================
     const starsEl = document.getElementById('stars');
-    for (let i = 0; i < 100; i++) {
-      const star = document.createElement('div');
-      star.className = 'star';
-      star.style.left = Math.random() * 100 + '%';
-      star.style.top = Math.random() * 100 + '%';
-      star.style.animationDelay = Math.random() * 2 + 's';
-      star.style.opacity = Math.random();
-      if (Math.random() > 0.7) {
-        star.style.width = '6px';
-        star.style.height = '6px';
-      }
-      starsEl.appendChild(star);
+    for (let i = 0; i < 120; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 100 + '%';
+      s.style.animationDelay = Math.random() * 2 + 's';
+      s.style.opacity = Math.random();
+      if (Math.random() > 0.7) { s.style.width = '6px'; s.style.height = '6px'; }
+      starsEl.appendChild(s);
     }
 
-    // ====== FLOATING HEARTS ======
+    // ============================
+    // FLOATING HEARTS
+    // ============================
     const floatingEl = document.getElementById('floatingHearts');
-    const heartEmojis = ['&#x2764;&#xFE0F;', '&#x1F497;', '&#x1F496;', '&#x1F495;', '&#x1F49D;', '&#x1F49E;'];
+    const heartEmojis = ['\u2764\uFE0F', '\uD83D\uDC97', '\uD83D\uDC96', '\uD83D\uDC95', '\uD83D\uDC9D', '\uD83D\uDC9E'];
 
     function spawnFloatingHeart() {
-      const heart = document.createElement('div');
-      heart.className = 'pixel-heart-float';
-      heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
-      heart.style.left = Math.random() * 100 + '%';
-      heart.style.fontSize = (12 + Math.random() * 20) + 'px';
-      heart.style.animationDuration = (5 + Math.random() * 8) + 's';
-      heart.style.animationDelay = Math.random() * 2 + 's';
-      floatingEl.appendChild(heart);
+      const h = document.createElement('div');
+      h.className = 'pixel-heart-float';
+      h.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+      h.style.left = Math.random() * 100 + '%';
+      h.style.fontSize = (14 + Math.random() * 18) + 'px';
+      h.style.animationDuration = (6 + Math.random() * 8) + 's';
+      h.style.animationDelay = Math.random() * 2 + 's';
+      floatingEl.appendChild(h);
+      setTimeout(() => h.remove(), 16000);
+    }
+    setInterval(spawnFloatingHeart, 1000);
 
-      setTimeout(() => heart.remove(), 15000);
+    // ============================
+    // WEB AUDIO SOUNDS
+    // ============================
+    let audioCtx;
+    function getAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      return audioCtx;
+    }
+    function playBeep(freq, dur) {
+      const a = getAudio();
+      const o = a.createOscillator();
+      const g = a.createGain();
+      o.connect(g); g.connect(a.destination);
+      o.type = 'square';
+      o.frequency.value = freq;
+      g.gain.value = 0.07;
+      g.gain.exponentialRampToValueAtTime(0.001, a.currentTime + dur);
+      o.start(); o.stop(a.currentTime + dur);
+    }
+    function playNope() { playBeep(200, 0.15); setTimeout(() => playBeep(150, 0.15), 120); }
+    function playVictory() {
+      [523, 659, 784, 1047, 1319].forEach((n, i) => setTimeout(() => playBeep(n, 0.2), i * 120));
     }
 
-    setInterval(spawnFloatingHeart, 800);
+    // ============================
+    // NO BUTTON - RUNAWAY LOGIC
+    // ============================
+    const btnNo = document.getElementById('btnNo');
+    const btnRow = document.getElementById('btnRow');
+    const dodgeCount = document.getElementById('dodgeCount');
+    const noTexts = ['No', 'Wait...', 'Huh?', 'Try again!', 'Really??', 'Think again!', 'You sure?', 'Nope!', 'C\'mon!', 'Pleeeease?'];
+    let dodges = 0;
 
-    // ====== EXPLODE HEARTS ON CLICK ======
-    function explodeHearts(event) {
-      playBeep(600, 0.1);
-      setTimeout(() => playBeep(800, 0.1), 100);
-      setTimeout(() => playBeep(1000, 0.1), 200);
+    function getRandomEdge() {
+      const bw = btnNo.offsetWidth;
+      const bh = btnNo.offsetHeight;
+      const row = btnRow.getBoundingClientRect();
+      const pad = 10;
 
-      const emojis = ['&#x2764;&#xFE0F;', '&#x1F496;', '&#x2728;', '&#x1F31F;', '&#x1F49D;', '&#x1F48E;', '&#x1F495;'];
-      for (let i = 0; i < 20; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-        particle.style.left = event.clientX + 'px';
-        particle.style.top = event.clientY + 'px';
-        const angle = (Math.PI * 2 * i) / 20;
-        const dist = 80 + Math.random() * 120;
-        particle.style.setProperty('--tx', Math.cos(angle) * dist + 'px');
-        particle.style.setProperty('--ty', Math.sin(angle) * dist + 'px');
-        document.body.appendChild(particle);
-        setTimeout(() => particle.remove(), 1000);
-      }
+      // keep within the viewport but outside the YES button zone
+      const maxX = window.innerWidth - bw - pad;
+      const maxY = window.innerHeight - bh - pad;
+
+      let x, y;
+      // random position anywhere on screen
+      x = pad + Math.random() * (maxX - pad);
+      y = pad + Math.random() * (maxY - pad);
+
+      return { x, y };
     }
 
-    // ====== LOVE METER ======
-    setTimeout(() => {
-      const fill = document.getElementById('meterFill');
-      const text = document.getElementById('meterText');
-      fill.classList.add('animate');
+    function dodgeNoButton() {
+      dodges++;
+      playNope();
+
+      // cycle text
+      btnNo.textContent = noTexts[dodges % noTexts.length];
+
+      // shrink slightly each time (min 70%)
+      const scale = Math.max(0.7, 1 - dodges * 0.03);
+      btnNo.style.transform = `scale(${scale})`;
+
+      // move to random position (make it "absolute" on the page after first dodge)
+      btnNo.style.position = 'fixed';
+      const pos = getRandomEdge();
+      btnNo.style.left = pos.x + 'px';
+      btnNo.style.top = pos.y + 'px';
+
+      // fun messages
+      const msgs = ['', 'nice try!', 'too slow!', 'haha!', 'not today!', 'wrong answer!', 'keep trying...', 'lol nope!', 'almost!', '😂'];
+      dodgeCount.textContent = msgs[dodges % msgs.length];
+      dodgeCount.style.color = `hsl(${dodges * 40}, 80%, 60%)`;
+
+      // make YES button grow slightly each dodge
+      const yesScale = Math.min(1.6, 1 + dodges * 0.05);
+      document.getElementById('btnYes').style.transform = `scale(${yesScale})`;
+    }
+
+    // Hover + touch dodge
+    btnNo.addEventListener('mouseenter', dodgeNoButton);
+    btnNo.addEventListener('touchstart', (e) => { e.preventDefault(); dodgeNoButton(); }, { passive: false });
+    // Click also dodges just in case
+    btnNo.addEventListener('click', (e) => { e.preventDefault(); dodgeNoButton(); });
+
+    // ============================
+    // YES BUTTON - SUCCESS!
+    // ============================
+    document.getElementById('btnYes').addEventListener('click', () => {
+      playVictory();
+
+      // Hide proposal
+      document.getElementById('proposalScreen').style.opacity = '0';
       setTimeout(() => {
-        text.textContent = 'OVER 9000!!!';
-        text.style.color = '#f39c12';
-      }, 2100);
-    }, 1500);
+        document.getElementById('proposalScreen').style.display = 'none';
+      }, 500);
 
-    // ====== SCROLL REVEAL FOR REASONS ======
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const delay = entry.target.getAttribute('data-delay') || 0;
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, delay);
-        }
-      });
-    }, { threshold: 0.3 });
-
-    document.querySelectorAll('.reason-item').forEach(item => {
-      observer.observe(item);
+      // Show success
+      setTimeout(() => {
+        document.getElementById('successScreen').classList.add('show');
+        launchConfetti();
+        // Keep launching confetti waves
+        const confInt = setInterval(launchConfetti, 2500);
+        setTimeout(() => clearInterval(confInt), 15000);
+      }, 400);
     });
 
-    // ====== KONAMI CODE ======
-    const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
-    let konamiIndex = 0;
+    // ============================
+    // CONFETTI
+    // ============================
+    function launchConfetti() {
+      const colors = ['#ff6b9d', '#ffd700', '#e74c3c', '#27ae60', '#3498db', '#f39c12', '#9b59b6', '#ff4757'];
+      const shapes = ['\u2764\uFE0F', '\uD83D\uDC96', '\u2728', '\uD83C\uDF1F', '\uD83D\uDC9D', '\u2B50', '\uD83C\uDF89', '\uD83C\uDF8A'];
 
-    document.addEventListener('keydown', (e) => {
-      if (e.keyCode === konamiCode[konamiIndex]) {
-        konamiIndex++;
-        if (konamiIndex === konamiCode.length) {
-          document.getElementById('secretArea').classList.add('show');
-          playVictorySound();
-          konamiIndex = 0;
+      for (let i = 0; i < 60; i++) {
+        const el = document.createElement('div');
+        el.className = 'confetti-piece';
 
-          // Burst of hearts
-          for (let i = 0; i < 30; i++) {
-            setTimeout(spawnFloatingHeart, i * 100);
-          }
+        // Mix of emoji and colored squares
+        if (Math.random() > 0.5) {
+          el.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+          el.style.fontSize = (12 + Math.random() * 18) + 'px';
+        } else {
+          el.style.width = (6 + Math.random() * 10) + 'px';
+          el.style.height = (6 + Math.random() * 10) + 'px';
+          el.style.background = colors[Math.floor(Math.random() * colors.length)];
         }
-      } else {
-        konamiIndex = 0;
+
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.setProperty('--rot', (Math.random() * 1080 - 540) + 'deg');
+        el.style.animationDuration = (2 + Math.random() * 3) + 's';
+        el.style.animationDelay = Math.random() * 1.5 + 's';
+
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 6000);
       }
-    });
-
-    // ====== PIXEL SOUNDS (Web Audio API) ======
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-    function playBeep(freq, duration) {
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.type = 'square';
-      osc.frequency.value = freq;
-      gain.gain.value = 0.08;
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-      osc.start();
-      osc.stop(audioCtx.currentTime + duration);
     }
 
-    function playVictorySound() {
-      const notes = [523, 659, 784, 1047];
-      notes.forEach((note, i) => {
-        setTimeout(() => playBeep(note, 0.2), i * 150);
-      });
-    }
-
-    // ====== CLICK ANYWHERE FOR SPARKLE ======
+    // ============================
+    // CLICK SPARKLE
+    // ============================
     document.addEventListener('click', (e) => {
       if (e.target.closest('.pixel-btn')) return;
-      const sparkle = document.createElement('div');
-      sparkle.className = 'particle';
-      sparkle.innerHTML = '&#x2728;';
-      sparkle.style.left = e.clientX + 'px';
-      sparkle.style.top = e.clientY + 'px';
-      sparkle.style.setProperty('--tx', (Math.random() - 0.5) * 60 + 'px');
-      sparkle.style.setProperty('--ty', -40 - Math.random() * 40 + 'px');
-      document.body.appendChild(sparkle);
-      setTimeout(() => sparkle.remove(), 1000);
+      const sp = document.createElement('div');
+      sp.className = 'particle';
+      sp.textContent = '\u2728';
+      sp.style.left = e.clientX + 'px';
+      sp.style.top = e.clientY + 'px';
+      sp.style.setProperty('--tx', (Math.random() - 0.5) * 60 + 'px');
+      sp.style.setProperty('--ty', -40 - Math.random() * 40 + 'px');
+      document.body.appendChild(sp);
+      setTimeout(() => sp.remove(), 1000);
     });
   </script>
 </body>
