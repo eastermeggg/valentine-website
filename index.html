@@ -147,7 +147,7 @@
       border: 2px solid #ffb6c1;
       box-shadow: 5px 5px 0 #3a0018;
       transition: all 0.3s ease;
-      position: absolute;
+      position: relative;
     }
 
     .dodge-count {
@@ -179,17 +179,6 @@
     @keyframes fadeIn {
       0%   { opacity: 0; }
       100% { opacity: 1; }
-    }
-
-    .success-heart-wrap {
-      width: 200px;
-      height: 175px;
-      animation: heartBeat 1s ease-in-out infinite;
-    }
-    .success-heart-wrap canvas {
-      image-rendering: pixelated;
-      width: 200px;
-      height: 175px;
     }
 
     .success-title {
@@ -285,8 +274,6 @@
       .pixel-btn { font-size: 11px; padding: 14px 26px; }
       .success-title { font-size: 13px; }
       .love-note p { font-size: 8px; }
-      .success-heart-wrap { width: 150px; height: 131px; }
-      .success-heart-wrap canvas { width: 150px; height: 131px; }
     }
 
     @media (max-width: 380px) {
@@ -327,9 +314,6 @@
 
   <!-- ===== SUCCESS SCREEN ===== -->
   <div class="success-screen" id="successScreen">
-    <div class="success-heart-wrap">
-      <canvas id="successHeartCanvas" width="32" height="28"></canvas>
-    </div>
     <div class="success-title">I KNEW YOU'D SAY YES!</div>
     <div class="love-note">
       <p>
@@ -583,34 +567,6 @@
         setTimeout(() => el.remove(), 6000);
       }
     }
-
-    // ============================
-    // SUCCESS HEART CANVAS
-    // ============================
-    const successCanvas = document.getElementById('successHeartCanvas');
-    const sctx = successCanvas.getContext('2d');
-
-    function drawSuccessHeart() {
-      sctx.clearRect(0, 0, 32, 28);
-      for (let y = 0; y < H.length; y++) {
-        for (let x = 0; x < H[y].length; x++) {
-          if (H[y][x] === '1') {
-            let ci;
-            if (y < 5 && x > 4 && x < 14) {
-              ci = Math.random() > 0.7 ? 5 : (Math.random() > 0.5 ? 3 : 4);
-            } else if (Math.random() > 0.88) {
-              ci = Math.floor(Math.random() * palette.length);
-            } else {
-              ci = y < 8 ? 2 : (Math.random() > 0.4 ? 0 : 1);
-            }
-            sctx.fillStyle = palette[ci];
-            sctx.fillRect(x, y, 1, 1);
-          }
-        }
-      }
-    }
-    drawSuccessHeart();
-    setInterval(drawSuccessHeart, 400);
 
     // ============================
     // MOUSE HEART TRAIL
